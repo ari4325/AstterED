@@ -1,0 +1,365 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <style>
+           
+
+    ::-webkit-scrollbar{
+            width: 8px;
+            background-color: black;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background-color: #25caa3;
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+
+         ::-webkit-scrollbar-track{
+            background-color: white;
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+
+        #outer
+{
+    width:100%;
+    text-align: center;
+}
+.inner
+{
+    display: inline-block;
+}
+
+    </style>
+
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>AstterEd</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+		<!-- CSS here -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.min.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/flaticon.css">
+        <link rel="stylesheet" href="css/odometer.css">
+        <link rel="stylesheet" href="css/aos.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    </head>
+    <body style="background-color: #141414;">
+
+
+		
+         <header>
+            <div id="sticky-header" class="menu-area transparent-header">
+                <div class="container custom-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                            <div class="menu-wrap">
+                                <nav class="menu-nav show">
+                                    <div class="logo">
+                                        <a href="index.html">
+                                            <img src="img/logo/logo.png" alt="Logo">
+                                        </a>
+                                    </div>
+                                    <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                        <ul class="navigation">
+                                            <li><a href="subscribe.html">Subscription</a>
+                                            </li>
+                                            <li><a href="courses.html">Courses</a>
+                                            </li>
+                                            <li class="active menu-item"><a href="dashboard.html">Dashboard</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="header-action d-none d-md-block">
+                                        <ul>
+                                                                                      
+                                            <li class="header-btn"><button id="walletBtn" href="#" class="btn">Wallet</button></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+
+                            <!-- Mobile Menu  -->
+                            <div class="mobile-menu">
+                                <div class="close-btn"><i class="fas fa-times"></i></div>
+
+                                <nav class="menu-box">
+                                    <div class="nav-logo"><a href="index.html"><img src="img/logo/logo.png" alt="" title=""></a>
+                                    </div>
+                                    <div class="menu-outer">
+                                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="menu-backdrop"></div>
+                            <!-- End Mobile Menu -->
+
+                            <!-- Modal Search -->
+                            <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <form>
+                                            <input type="text" placeholder="Search here...">
+                                            <button><i class="fas fa-search"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Search-end -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header-area-end -->
+
+
+        <!-- main-area -->
+        <main>
+
+
+            <!-- pricing-area -->
+            <section class="pricing-area pricing-bg" style="background-color: #141414;">
+                
+                    
+                    <div class="pricing-box-wrap">
+                        <div class="row justify-content-center">
+                            
+                            <div class="col-lg-6 col-md-6 col-sm-8">
+                                <div class="pricing-box-item active mb-30">
+                                    
+                                    <div class="pricing-list">
+                                        <ul>
+                                            <li class="quality">Initial Amount Staked: <span id="userStaked"></span></li>
+                                            <li class="quality">Your Rewards: <span id="reward"></span></li>
+                                            <li class="quality">Total Amount Staked: <span id="total"></span></li>
+                                        </ul>
+                                    </div>
+                                    <div id="outer">
+                                    <div class="pricing-btn inner" style="padding: 5px;">
+                                        <button id="unstakeRewards" class="btn">Unstake rewards</button>
+                                    </div>
+                                    <div class="pricing-btn inner" style="padding: 5px;">
+                                        <button id="unsubscribe" class="btn">Unsubscribe</button>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 10%; line-height: 2;">If you unsubscribe, you'll unstake the total amount staked. You'll still be able to enjoy the courses, but will not get the rewards.</div>
+                            </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                 <div class="pricing-box-wrap">
+                        <div class="row justify-content-center">
+                            
+                            <div class="col-lg-6 col-md-6 col-sm-8">
+                                <div class="pricing-box-item active mb-30">
+                                    
+                                    <div class="pricing-list">
+                                        <ul>
+                                            <li  class="quality">Backing per $AST <span id="backing">Amount</span></li>
+                                            
+                                            <li  class="quality">Total Value Deposited <span id="deposit">Amount</span></li>
+                                            <li  class="quality">Market Value of Treasury Assets <span id="marketValue">Amount</span></li>
+                                            
+                                            <li  class="quality">Protocol Owned Liquidity <span id="liquidity">Amount</span></li>
+
+                                            <li  class="quality">Total $AST staked <span id="staked">Amount</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+
+            </section>
+            <!-- pricing-area-end -->
+
+           
+        </main>
+        <!-- main-area-end -->
+
+
+
+
+		<!-- JS here -->
+        <script>
+            //https://speedy-nodes-nyc.moralis.io/2121a9e387697a9756013326/avalanche/testnet
+            const usdtAddress = "0x08a978a0399465621e667C49CD54CC874DC064Eb";
+            const astterAddress = "0xFe9085EB365A4807974FD76335605B939F57168f";
+            const treasuryAddress = "0xcD950132f1F105E1F30b30623574B9F7DDE0Dfc5";
+
+            var stakedAmount, depositAmount, marketValueAmount, backingAmount, liquidityAmount, userStakedAmount, rewardAmount, totalAmount;
+            var staked = document.getElementById("staked");
+            var deposit = document.getElementById("deposit");
+            var marketValue = document.getElementById("marketValue");
+            var backing = document.getElementById("backing");
+            var liquidity = document.getElementById("liquidity");
+            var userStaked = document.getElementById("userStaked");
+            var reward = document.getElementById("reward");
+            var total = document.getElementById("total");
+            var unstakeRewards = document.getElementById("unstakeRewards");
+            var unsubscribe = document.getElementById("unsubscribe");
+
+            var web3admin = new Web3(new Web3.providers.HttpProvider("https://speedy-nodes-nyc.moralis.io/2121a9e387697a9756013326/avalanche/testnet"));
+            var AstterCore, Astter, USDT, web3;
+            var erc20abi, astterCoreABI;
+
+            var walletBtn = document.getElementById("walletBtn");
+
+            const load = async () => {
+                web3 = new Web3(window.ethereum);
+                accounts = await web3.eth.getAccounts();
+                if(accounts[0] != null) {
+                    updateUI();
+                }
+
+                await fetch('../build/contracts/ERC20.json')
+               .then(response => response.json())
+               .then(data => {
+                  erc20abi = data;
+                  USDT = new web3.eth.Contract(erc20abi.abi, usdtAddress);
+                  Astter = new web3.eth.Contract(erc20abi.abi, astterAddress);
+                });
+
+                await fetch('../build/contracts/AstterCore.json')
+               .then(response => response.json())
+               .then(data => {
+                  astterCoreABI = data;
+                  AstterCore = new web3.eth.Contract(astterCoreABI.abi, treasuryAddress);
+                });
+
+                var isSubscribed = await AstterCore.methods.getSubscriptionStatus(accounts[0]).call();
+                if(isSubscribed == 0) {
+                    location.assign("/subscribe.html");
+                }
+
+                userStakedAmount = await AstterCore.methods.getUserStaked(accounts[0]).call();
+                userStaked.innerText = userStakedAmount * (10 ** -18) + " $AST";
+                
+                rewardAmount = await AstterCore.methods.currentReward(accounts[0]).call();
+                reward.innerText = rewardAmount * (10 ** -18) + " $AST" ;
+                
+                total.innerText = ( userStakedAmount * (10 ** -18) ) + ( rewardAmount * (10 ** -18) ) + " $AST";
+
+                stakedAmount = await AstterCore.methods.getTotalStaked().call();
+                depositAmount = await AstterCore.methods.getTotalDeposited().call();
+                liquidityAmount = await AstterCore.methods.getAstterBalanceOfContract().call();
+
+                staked.innerText = stakedAmount * (10 ** -18);
+                deposit.innerText = depositAmount * (10 ** -18) ;
+                liquidity.innerText = liquidityAmount * (10 ** -18) ;
+                backing.innerText = (liquidityAmount/backingAmount) * (10 ** -18);
+
+                const aggregatorV3InterfaceABI = [{ "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "description", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint80", "name": "_roundId", "type": "uint80" }], "name": "getRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "latestRoundData", "outputs": [{ "internalType": "uint80", "name": "roundId", "type": "uint80" }, { "internalType": "int256", "name": "answer", "type": "int256" }, { "internalType": "uint256", "name": "startedAt", "type": "uint256" }, { "internalType": "uint256", "name": "updatedAt", "type": "uint256" }, { "internalType": "uint80", "name": "answeredInRound", "type": "uint80" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "version", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }]
+                const addr = "0x7898AcCC83587C3C55116c5230C17a6Cd9C71bad"
+                const priceFeed = new web3.eth.Contract(aggregatorV3InterfaceABI, addr)
+                priceFeed.methods.latestRoundData().call()
+                .then((roundData) => {
+                    console.log("Latest Round Data", roundData)
+                    marketValue.innerText = depositAmount * (10 ** -18) * roundData.answer * (10 ** -8);
+                })
+            }
+
+            const updateUI = async () => {
+                var net_id = await web3.eth.net.getId();
+                if(net_id == 80001){
+                    accounts = await web3.eth.getAccounts();
+                    
+                    walletBtn.innerText = accounts[0].substring(0, 5) + "..." + accounts[0].substring(38, 42);
+                    console.log(accounts[0]);              
+                }else{
+                    alert("Please switch to Avalanche Fuji Testnet");
+                }
+            }
+            
+
+            walletBtn.addEventListener("click", async () => {
+                if(window.ethereum){
+                    try{
+                        web3 = new Web3(window.ethereum);
+                        await window.ethereum.enable();
+
+                        updateUI();
+                    }catch(err){
+                        alert(err);
+                    }
+                }else{
+                    alert("Please install a web3 wallet to proceed");
+                }
+            });
+
+            unstakeRewards.addEventListener("click", async () => {
+                if(rewardAmount == 0) {
+                    alert("You have not earned rewards yet");
+                }else{
+                    var unstakeFunctionData = AstterCore.methods.withdrawReward().encodeABI();
+                    await web3.eth.sendTransaction({from: accounts[0], data: unstakeFunctionData, to: treasuryAddress})
+                    .on('transactionHash', async function(hash){
+                        
+                    })
+                    .on('receipt', async function(receipt){
+                        console.log(receipt);
+                        alert("Rewards redeemed successfully");
+                    })
+                    .on('confirmation', function(confirmationNumber, receipt){
+                        
+                    })
+                    .on('error', function(error, receipt) {
+                        console.log(error);
+                    });
+                }
+            });
+
+            unsubscribe.addEventListener("click", async () => {
+                var unsubscribeFndata = AstterCore.methods.unstake().encodeABI();
+                await web3.eth.sendTransaction({from: accounts[0], data: unsubscribeFndata, to: treasuryAddress})
+                .on('transactionHash', async function(hash){
+                    
+                })
+                .on('receipt', async function(receipt){
+                    console.log(receipt);
+                    alert("Funds redeemed successfully");
+                })
+                .on('confirmation', function(confirmationNumber, receipt){
+                    
+                })
+                .on('error', function(error, receipt) {
+                    console.log(error);
+                });
+            });
+
+            load();
+        </script>
+        <script src="js/vendor/jquery-3.6.0.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/isotope.pkgd.min.js"></script>
+        <script src="js/imagesloaded.pkgd.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.odometer.min.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/ajax-form.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+​
+<head>
+  <meta charset="utf-8" />
+
+  <style>
+           
+
+    ::-webkit-scrollbar{
+            width: 8px;
+            background-color: black;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background-color: #25caa3;
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+
+         ::-webkit-scrollbar-track{
+            background-color: white;
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+    </style>
+
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>AstterEd</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <!-- Place favicon.ico in the root directory -->
+
+		<!-- CSS here -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.min.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/flaticon.css">
+        <link rel="stylesheet" href="css/odometer.css">
+        <link rel="stylesheet" href="css/aos.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+
+  <script src="https://global.transak.com/sdk/v1.1/widget.js" async></script>
+</head>
+​
+<body  style="background-color: #141414;">
+
+    <body>
+        <header>
+           <div id="sticky-header" class="menu-area transparent-header">
+               <div class="container custom-container">
+                   <div class="row">
+                       <div class="col-12">
+                           <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                           <div class="menu-wrap">
+                               <nav class="menu-nav show">
+                                   <div class="logo">
+                                       <a href="index.html">
+                                           <img src="img/logo/logo.png" alt="Logo">
+                                       </a>
+                                   </div>
+                                   <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                       <ul class="navigation">
+                                           <li class="active menu-item"><a href="subscribe.html">Subscription</a>
+                                           </li>
+                                           <li><a href="courses.html">Courses</a>
+                                           </li>
+                                           <li><a href="dashboard.html">Dashboard</a></li>
+                                       </ul>
+                                   </div>
+                                   <div class="header-action d-none d-md-block">
+                                       <ul>
+                                                                                     
+                                           <li class="header-btn"><button id="walletBtn" class="btn">Wallet</button></li>
+                                       </ul>
+                                   </div>
+                               </nav>
+                           </div>
+
+                           <!-- Mobile Menu  -->
+                           <div class="mobile-menu">
+                               <div class="close-btn"><i class="fas fa-times"></i></div>
+
+                               <nav class="menu-box">
+                                   <div class="nav-logo"><a href="index.html"><img src="img/logo/logo.png" alt="" title=""></a>
+                                   </div>
+                                   <div class="menu-outer">
+                                       <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                   </div>
+                               </nav>
+                           </div>
+                           <div class="menu-backdrop"></div>
+                           <!-- End Mobile Menu -->
+
+                           <!-- Modal Search -->
+                           <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                               <div class="modal-dialog" role="document">
+                                   <div class="modal-content">
+                                       <form>
+                                           <input type="text" placeholder="Search here...">
+                                           <button><i class="fas fa-search"></i></button>
+                                       </form>
+                                   </div>
+                               </div>
+                           </div>
+                           <!-- Modal Search-end -->
+
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </header>
+       <!-- header-area-end -->
+
+
+       <!-- main-area -->
+       <main>
+
+
+           <!-- pricing-area -->
+           <section class="pricing-area pricing-bg" style="background-color: #141414;">
+               <div class="container">
+                   
+                   <div class="pricing-box-wrap">
+                       <div class="row justify-content-center">
+                           
+                           <div class="col-lg-4 col-md-6 col-sm-8">
+                               <div class="pricing-box-item active mb-30">
+                                   <div class="pricing-top">
+                                       <h6>Wallet</h6>
+                                       <div class="price">
+                                           <span id = "walletFund" style="color:black;">Fetching balance...</span>
+                                       </div>
+                                   </div>
+                                   <div id="message"></div>
+                                   <div class="pricing-btn">
+                                       <button id="subscribeBtn" onclick="launchTransak()" class="btn">Add Funds to Wallet</button>
+                                   </div>
+                               </div>
+                           </div>
+                           
+                       </div>
+                   </div>
+               </div>
+           </section>
+           <!-- pricing-area-end -->
+
+          
+       </main>
+  <script>
+    const usdcAddress = "0x2058A9D7613eEE744279e3856Ef0eAda5FCbaA7e";
+    var accounts, walletFund, USDC, message;
+
+    const load = async () => {
+
+        walletFund = document.getElementById('walletFund');
+        message = document.getElementById('message');
+
+        web3 = new Web3(window.ethereum);
+        accounts = await web3.eth.getAccounts();
+        if(accounts[0] != null) {
+            updateUI();
+        }
+
+        await fetch('../build/contracts/ERC20.json')
+        .then(response => response.json())
+        .then(data => {
+            erc20abi = data;
+        });
+
+        USDC = new web3.eth.Contract(erc20abi.abi, usdcAddress);
+
+        USDC.methods.balanceOf(accounts[0]).call({from: accounts[0]}, function(error, result) {
+            console.log(result);
+            var tokens = result*Math.pow(10, -8);
+            walletFund.innerText = tokens + '  USDT';
+            if(tokens < 100) {
+                message.innerText = "Oops! You don't seem to have the required tokens\n\nDon't worry we have got you covered. Click on the link below";
+            }
+        });
+
+    }
+
+    const updateUI = async () => {
+        var net_id = await web3.eth.net.getId();
+        if(net_id == 80001){
+            accounts = await web3.eth.getAccounts();
+            
+            walletBtn.innerText = accounts[0].substring(0, 5) + "..." + accounts[0].substring(38, 42);
+            console.log(accounts[0]);  
+
+        }else{
+            alert("Please switch to Avalanche Fuji Testnet");
+        }
+    }
+    
+    function launchTransak() {
+      let transak = new TransakSDK.default({
+        apiKey: 'b91f1638-aba4-463f-b62a-2b72f5df9df2',  // Your API Key
+        environment: 'STAGING', // STAGING/PRODUCTION
+        hostURL: window.location.origin,
+        widgetHeight: '625px',
+        widgetWidth: '500px',
+        network: 'polygon',
+        defaultCryptoCurrency: 'USDC', 
+        walletAddress: accounts[0], 
+        themeColor: '#000000', 
+        fiatCurrency: 'USD', 
+        defaultCryptoAmount: '100',
+        exchangeScreenTitle: 'Buy USDC directly to your wallet'
+      });
+      transak.init();
+      // To get all the events
+      transak
+        .on(transak.ALL_EVENTS, (data) => {
+          console.log(data)
+        });
+      // This will trigger when the user marks payment is made.
+      transak.on(transak.EVENTS.TRANSAK_ORDER_SUCCESSFUL, (orderData) => {
+        console.log(orderData);
+        USDC.methods.balanceOf(accounts[0]).call({from: accounts[0]}, function(error, result) {
+            console.log(result);
+            walletFund.innerText = result*Math.pow(10, -8) + '  USDT';
+        });
+      });
+      transak.on(transak.EVENTS.TRANSAK_WIDGET_CLOSE, (orderData) => {
+        USDC.methods.balanceOf(accounts[0]).call({from: accounts[0]}, function(error, result) {
+            console.log(result);
+            var tokens = result * Math.pow(10, -8);
+            if(tokens < 100) {
+                message.innerText = "We still can't read your tokens. If you have bought tokens, we will update it soon. "
+            }
+        });
+      })
+    }
+
+    load();
+  </script>
+</body>
+​
+</html>

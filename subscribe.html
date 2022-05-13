@@ -1,0 +1,302 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <style>
+           
+
+    ::-webkit-scrollbar{
+            width: 8px;
+            background-color: black;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background-color: #25caa3;
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+
+         ::-webkit-scrollbar-track{
+            background-color: white;
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        }
+    </style>
+
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>AstterEd</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <!-- Place favicon.ico in the root directory -->
+
+		<!-- CSS here -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/animate.min.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/flaticon.css">
+        <link rel="stylesheet" href="css/odometer.css">
+        <link rel="stylesheet" href="css/aos.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/responsive.css">
+    </head>
+    <body style="background-color: #141414;">
+
+
+		
+         <header>
+            <div id="sticky-header" class="menu-area transparent-header">
+                <div class="container custom-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
+                            <div class="menu-wrap">
+                                <nav class="menu-nav show">
+                                    <div class="logo">
+                                        <a href="index.html">
+                                            <img src="img/logo/logo.png" alt="Logo">
+                                        </a>
+                                    </div>
+                                    <div class="navbar-wrap main-menu d-none d-lg-flex">
+                                        <ul class="navigation">
+                                            <li class="active menu-item"><a href="subscribe.html">Subscription</a>
+                                            </li>
+                                            <li><a href="courses.html">Courses</a>
+                                            </li>
+                                            <li><a href="dashboard.html">Dashboard</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="header-action d-none d-md-block">
+                                        <ul>
+                                                                                      
+                                            <li class="header-btn"><button id="walletBtn" class="btn">Wallet</button></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+
+                            <!-- Mobile Menu  -->
+                            <div class="mobile-menu">
+                                <div class="close-btn"><i class="fas fa-times"></i></div>
+
+                                <nav class="menu-box">
+                                    <div class="nav-logo"><a href="index.html"><img src="img/logo/logo.png" alt="" title=""></a>
+                                    </div>
+                                    <div class="menu-outer">
+                                        <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                                    </div>
+                                </nav>
+                            </div>
+                            <div class="menu-backdrop"></div>
+                            <!-- End Mobile Menu -->
+
+                            <!-- Modal Search -->
+                            <div class="modal fade" id="search-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <form>
+                                            <input type="text" placeholder="Search here...">
+                                            <button><i class="fas fa-search"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal Search-end -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header-area-end -->
+
+
+        <!-- main-area -->
+        <main>
+
+
+            <!-- pricing-area -->
+            <section class="pricing-area pricing-bg" style="background-color: #141414;">
+                <div class="container">
+                    
+                    <div class="pricing-box-wrap">
+                        <div class="row justify-content-center">
+                            
+                            <div class="col-lg-4 col-md-6 col-sm-8">
+                                <div class="pricing-box-item active mb-30">
+                                    <div class="pricing-top">
+                                        <h6>standard</h6>
+                                        <div class="price">
+                                            <h5 style="color:black;">100 USDC</h5>
+                                            <span>Yearly</span>
+                                        </div>
+                                    </div>
+                                    <div class="pricing-list">
+                                        <ul>
+                                            <li class="quality"><i class="fas fa-check"></i> Course Limit <span>Unlimited</span></li>
+                                            <li><i class="fas fa-check"></i> Unstake rewards anytime</li>
+                                            <li><i class="fas fa-check"></i> Cancel subscription anytime</li>
+                                        </ul>
+                                    </div>
+                                    <div class="pricing-btn">
+                                        <button id="subscribeBtn" class="btn">Subscribe and Stake</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- pricing-area-end -->
+
+           
+        </main>
+        <!-- main-area-end -->
+
+
+
+
+		<!-- JS here -->
+        <script>
+            const usdcAddress = "0x2058A9D7613eEE744279e3856Ef0eAda5FCbaA7e";
+            const astterAddress = "0xFe9085EB365A4807974FD76335605B939F57168f";
+            const treasuryAddress = "0xcD950132f1F105E1F30b30623574B9F7DDE0Dfc5";
+
+            var AstterCore, astterCoreABI;
+
+            var subscribeBtn = document.getElementById("subscribeBtn");
+            var walletBtn = document.getElementById('walletBtn');
+            var accounts, web3, erc20abi, usdc; 
+
+
+            var approved = false;
+
+            const load = async () => {
+                web3 = new Web3(window.ethereum);
+                accounts = await web3.eth.getAccounts();
+                if(accounts[0] != null) {
+                    updateUI();
+                }
+
+                await fetch('../build/contracts/ERC20.json')
+               .then(response => response.json())
+               .then(data => {
+                  erc20abi = data;
+                });
+
+                usdc = new web3.eth.Contract(erc20abi.abi, usdcAddress);
+
+                await fetch('../build/contracts/AstterCore.json')
+               .then(response => response.json())
+               .then(data => {
+                  astterCoreABI = data;
+                  AstterCore = new web3.eth.Contract(astterCoreABI.abi, treasuryAddress);
+                });
+
+                var isSubscribed = await AstterCore.methods.getSubscriptionStatus(accounts[0]).call();
+                if(isSubscribed == 1) {
+                    location.assign("/dashboard.html");
+                }
+            }
+
+            const updateUI = async () => {
+                var net_id = await web3.eth.net.getId();
+                if(net_id == 80001){
+                    
+                    accounts = await web3.eth.getAccounts();
+                    
+                    walletBtn.innerText = accounts[0].substring(0, 5) + "..." + accounts[0].substring(38, 42);
+                    console.log(accounts[0]);              
+                }else{
+                    alert("Please switch to Avalanche Fuji Testnet");
+                }
+            }
+            
+
+            walletBtn.addEventListener("click", async () => {
+                if(window.ethereum){
+                    try{
+                        web3 = new Web3(window.ethereum);
+                        await window.ethereum.enable();
+
+                        updateUI();
+                    }catch(err){
+                        alert(err);
+                    }
+                }else{
+                    alert("Please install a web3 wallet to proceed");
+                }
+            })
+
+            subscribeBtn.addEventListener("click", async() => {
+            
+                if(approved) {
+                    var transferData = AstterCore.methods.buySubscription().encodeABI();
+                    await web3.eth.sendTransaction({from: accounts[0], data: transferData, to: treasuryAddress})
+                    .on('transactionHash', async function(hash){
+            
+                    })
+                    .on('receipt', async function(receipt){
+                        //console.log(receipt.events.MintUri.returnValues['1']);
+                        console.log(receipt);
+                        subscribeBtn.innerText = "Staked Successfully";
+                    })
+                    .on('confirmation', function(confirmationNumber, receipt){
+                        
+                    })
+                    .on('error', function(error, receipt) {
+                        console.log(error);
+                    });
+                    approved = false;
+                }else{
+                    var usdcbalance = await usdc.methods.balanceOf(accounts[0]).call();
+
+                    if(usdcbalance >= web3.utils.toWei("100", "ether")) {
+                        var approveData = usdc.methods.approve(treasuryAddress, web3.utils.toWei("100", "ether")).encodeABI();
+
+                        await web3.eth.sendTransaction({from: accounts[0], data: approveData, to: usdcAddress})
+                        .on('transactionHash', async function(hash){
+                
+                        })
+                        .on('receipt', async function(receipt){
+                            //console.log(receipt.events.MintUri.returnValues['1']);
+                            console.log(receipt);
+                            subscribeBtn.innerText = "SEND usdc";
+                            approved = true;
+                        })
+                        .on('confirmation', function(confirmationNumber, receipt){
+                            
+                        })
+                        .on('error', function(error, receipt) {
+                            console.log(error);
+                        });
+                    }
+
+                }
+                
+            });
+
+            load();
+        </script>
+        <script src="js/vendor/jquery-3.6.0.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/isotope.pkgd.min.js"></script>
+        <script src="js/imagesloaded.pkgd.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.odometer.min.js"></script>
+        <script src="js/jquery.appear.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/ajax-form.js"></script>
+        <script src="js/wow.min.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
